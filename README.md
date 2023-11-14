@@ -19,4 +19,6 @@ Using PyQt5 GUI to show imageAI semantic segmentation result
 ![image](https://github.com/yjg30737/pyqt-imageai-gui/assets/55078043/4b9783f1-5fe7-4af7-9f24-498d00867715)
 
 ### Use the model
-writing now
+![image](https://github.com/yjg30737/pyqt-imageai-gui/assets/55078043/f88fbe78-e7bc-49cb-9bb2-394715c7dc88)
+
+
