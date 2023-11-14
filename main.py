@@ -69,6 +69,7 @@ class MainWindow(QMainWindow):
 
         self.__fileListWidget = QListWidget()
         self.__fileListWidget.itemActivated.connect(self.__itemActivated)
+        self.__fileListWidget.currentItemChanged.connect(self.__itemActivated)
 
         self.__runBtn = QPushButton('Run')
         self.__runBtn.clicked.connect(self.__run)
@@ -123,7 +124,7 @@ class MainWindow(QMainWindow):
         self.__fileListWidget.addItems(filenames)
         self.__runBtn.setEnabled(len(filenames) > 0)
 
-    def __itemActivated(self, item):
+    def __setItemToEachView(self, item):
         filename = item.text()
         self.__cur_src_filename = filename
         if self.__filename_dict.get(self.__cur_src_filename, '') == '':
@@ -135,6 +136,16 @@ class MainWindow(QMainWindow):
             self.__afterView.scene().clear()
             self.__afterView.setFilename(self.__filename_dict[self.__cur_src_filename])
         self.__beforeView.setFilename(self.__cur_src_filename)
+
+    def __itemActivated(self, item):
+        if item:
+            self.__setItemToEachView(item)
+        else:
+            item = self.__fileListWidget.currentItem()
+            if item:
+                self.__setItemToEachView(item)
+            else:
+                print('there is no item what')
 
     def __run(self):
         filename = self.__fileListWidget.currentItem().text()
