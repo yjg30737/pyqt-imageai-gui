@@ -30,15 +30,16 @@ QApplication.setFont(QFont('Arial', 12))
 class Thread(QThread):
     generateFinished = pyqtSignal(str)
 
-    def __init__(self, filename, model_path):
+    def __init__(self, filename, model_name, model_path):
         super(Thread, self).__init__()
         self.__filename = filename
+        self.__model_name = model_name
         self.__model_path = model_path
 
     def run(self):
         try:
             dst_filename = os.path.basename(self.__filename)+'_result'+os.path.splitext(self.__filename)[-1]
-            get_result_image_by_doing_object_detection(self.__model_path, self.__filename, dst_filename)
+            get_result_image_by_doing_object_detection(self.__model_name, self.__model_path, self.__filename, dst_filename)
             self.generateFinished.emit(dst_filename)
         except Exception as e:
             raise Exception(e)
@@ -137,7 +138,7 @@ class MainWindow(QMainWindow):
 
     def __run(self):
         filename = self.__fileListWidget.currentItem().text()
-        self.__t = Thread(filename, self.__cur_model_path)
+        self.__t = Thread(filename, self.__cur_model_name, self.__cur_model_path)
         self.__t.started.connect(self.__started)
         self.__t.finished.connect(self.__finished)
         self.__t.generateFinished.connect(self.__generateFinished)

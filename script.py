@@ -27,9 +27,14 @@ def download_model(model):
 def get_model_path(model):
     return MODEL_DICT[model]['filename']
 
-def get_result_image_by_doing_object_detection(model_path, src_filename, dst_filename):
+def get_result_image_by_doing_object_detection(model_name, model_path, src_filename, dst_filename):
     detector = ObjectDetection()
-    detector.setModelTypeAsRetinaNet()
+    if model_name == 'RetinaNet':
+        detector.setModelTypeAsRetinaNet()
+    elif model_name == 'YOLOv3':
+        detector.setModelTypeAsYOLOv3()
+    elif model_name == 'TinyYOLOv3':
+        detector.setModelTypeAsTinyYOLOv3()
     detector.setModelPath(model_path)
     detector.loadModel()
 
