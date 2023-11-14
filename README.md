@@ -1,4 +1,3 @@
-![image](https://github.com/yjg30737/pyqt-imageai-gui/assets/55078043/36defea9-4f92-4513-be22-1a1c6e96621a)# pyqt-imageai-gui
 Using PyQt5 GUI to show imageAI semantic segmentation result
 
 ## Requirements
