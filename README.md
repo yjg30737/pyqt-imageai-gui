@@ -1,8 +1,8 @@
-Using PyQt5 GUI to show imageAI semantic segmentation result
+Using PyQt5 GUI to show imageAI object detection result
 
 ## Requirements
 * PyQt5>=5.14
-* imageai (for using semantic segmentation)
+* imageai (for using object detection)
 * requests (for downloading models from remote server)
 
 ## How to Install
