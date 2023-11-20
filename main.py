@@ -3,9 +3,9 @@ import sys
 
 from downloadModelDialog import DownloadModelDialog
 from findPathWidget import FindPathWidget
-from imageView import ImageView
 from script import is_exists, get_model_path, get_result_image_by_doing_object_detection
 from selectModelDialog import SelectModelDialog
+from splittedImageView import SplittedImageView
 
 # Get the absolute path of the current script file
 script_path = os.path.abspath(__file__)
@@ -17,7 +17,7 @@ sys.path.insert(0, project_root)
 sys.path.insert(0, os.getcwd())  # Add the current directory as well
 
 from PyQt5.QtWidgets import QMainWindow, QPushButton, QApplication, QSplitter, QListWidget, QVBoxLayout, \
-    QWidget, QSizePolicy, QDialog, QMessageBox, QLabel
+    QWidget, QSizePolicy, QDialog, QMessageBox, QLabel, QTableWidget, QHeaderView
 from PyQt5.QtCore import Qt, QCoreApplication, QThread, pyqtSignal
 from PyQt5.QtGui import QFont
 
@@ -74,33 +74,29 @@ class MainWindow(QMainWindow):
         self.__runBtn = QPushButton('Run')
         self.__runBtn.clicked.connect(self.__run)
 
-        self.__beforeView = ImageView()
-        self.__afterView = ImageView()
-
-        viewSplitter = QSplitter()
-        viewSplitter.addWidget(self.__beforeView)
-        viewSplitter.addWidget(self.__afterView)
-        viewSplitter.setHandleWidth(2)
-        viewSplitter.setChildrenCollapsible(False)
-        viewSplitter.setSizes([500, 500])
-        viewSplitter.setStyleSheet(
-            "QSplitterHandle {background-color: blue; }")
+        self.__view = SplittedImageView(self)
 
         lay = QVBoxLayout()
         lay.addWidget(self.__runBtn)
-        lay.addWidget(viewSplitter)
+        lay.addWidget(self.__view)
         lay.setContentsMargins(0, 0, 0, 0)
         lay.setSpacing(0)
 
         splitterRightWidget = QWidget()
         splitterRightWidget.setLayout(lay)
 
+        self.__detectionTableWidget = QTableWidget()
+        self.__detectionTableWidget.setColumnCount(2)
+        self.__detectionTableWidget.setHorizontalHeaderLabels(['Name', 'Value'])
+        self.__detectionTableWidget.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)
+
         splitter = QSplitter()
         splitter.addWidget(self.__fileListWidget)
         splitter.addWidget(splitterRightWidget)
+        splitter.addWidget(self.__detectionTableWidget)
         splitter.setHandleWidth(1)
         splitter.setChildrenCollapsible(False)
-        splitter.setSizes([300, 700])
+        splitter.setSizes([200, 600, 200])
         splitter.setStyleSheet(
             "QSplitterHandle {background-color: lightgray;}")
         splitter.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
@@ -128,14 +124,11 @@ class MainWindow(QMainWindow):
         filename = item.text()
         self.__cur_src_filename = filename
         if self.__filename_dict.get(self.__cur_src_filename, '') == '':
-            if not self.__afterView.scene():
-                self.__filename_dict[self.__cur_src_filename] = ''
-            else:
-                self.__afterView.scene().clear()
+            self.__filename_dict[self.__cur_src_filename] = ''
+            self.__view.removeItemOnTheRight()
         else:
-            self.__afterView.scene().clear()
-            self.__afterView.setFilename(self.__filename_dict[self.__cur_src_filename])
-        self.__beforeView.setFilename(self.__cur_src_filename)
+            self.__view.setFilenameToRight(self.__filename_dict[self.__cur_src_filename])
+        self.__view.setFilenameToLeft(self.__cur_src_filename)
 
     def __itemActivated(self, item):
         if item:
@@ -160,7 +153,7 @@ class MainWindow(QMainWindow):
 
     def __generateFinished(self, filename):
         self.__filename_dict[self.__cur_src_filename] = filename
-        self.__afterView.setFilename(filename)
+        self.__view.setFilenameToRight(filename)
 
     def __finished(self):
         print('finished')
@@ -195,7 +188,7 @@ def main():
                 mainWindow.show()
             else:
                 QMessageBox.information(mainWindow, 'PyQt ImageAI GUI', 'Downloading process stopped. Goodbye.')
-
+                sys.exit(app.exec())
         sys.exit(app.exec())
 
 

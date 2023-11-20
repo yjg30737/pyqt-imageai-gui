@@ -48,13 +48,13 @@ def get_result_image_by_doing_object_detection(model_name, model_path, src_filen
     return dst_filename
 
 
-def train_custom_dataset(model_path, object_names_array, data_directory):
+def train_custom_dataset(model_name, model_path, object_names_array, data_directory):
     from imageai.Detection.Custom import DetectionModelTrainer
 
     trainer = DetectionModelTrainer()
     trainer.setModelTypeAsYOLOv3()
-    trainer.setDataDirectory(data_directory="hololens-yolo")
-    trainer.setTrainConfig(object_names_array=["hololens"], batch_size=4, num_experiments=200,
+    trainer.setDataDirectory(data_directory=data_directory)
+    trainer.setTrainConfig(object_names_array=object_names_array, batch_size=4, num_experiments=100,
                            train_from_pretrained_model="yolov3.pt")
     # In the above,when training for detecting multiple objects,
     # set object_names_array=["object1", "object2", "object3",..."objectz"]
@@ -65,4 +65,46 @@ def train_custom_dataset(model_path, object_names_array, data_directory):
 # src_filename = os.path.join(os.getcwd(), 'image.jpg')
 # dst_filename = os.path.join(os.getcwd(), 'imagenew.jpg')
 #
-# get_result_image_by_doing_object_detection(model_path, src_filename, dst_filename)
+
+import os
+from PIL import Image
+
+import os
+from PIL import Image
+
+
+# def convert_png_to_jpg(source_folder, dest_folder=None):
+#     # If destination folder is not specified, use the source folder
+#     if dest_folder is None:
+#         dest_folder = source_folder
+#
+#     # Ensure destination folder exists
+#     os.makedirs(dest_folder, exist_ok=True)
+#
+#     # Iterate over all files in the source folder
+#     for filename in os.listdir(source_folder):
+#         if filename.endswith(".png"):
+#             # Construct the full file path
+#             file_path = os.path.join(source_folder, filename)
+#
+#             # Open the image
+#             with Image.open(file_path) as img:
+#                 # Convert the image to RGB mode in case it's in RGBA
+#                 rgb_img = img.convert('RGB')
+#
+#                 # Construct the destination file path
+#                 dest_file_path = os.path.join(dest_folder, filename[:-4] + '.jpg')
+#
+#                 # Save the image in JPG format
+#                 rgb_img.save(dest_file_path, "JPEG")
+#                 os.remove(file_path)
+#
+#     print("Conversion completed.")
+#
+#
+# # Example usage
+# source_folder = 'dataset/train/images'
+# dest_folder = 'dataset/train/images'  # Optional: specify a different folder for the converted images
+# convert_png_to_jpg(source_folder, dest_folder)
+
+# train_custom_dataset('YOLOv3', 'yolov3.pt', ['hololens'], 'hololens-yolo')
