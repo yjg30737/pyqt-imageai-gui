@@ -22,12 +22,9 @@ Model file will be downloaded in the root folder of this repo
 Note: If there is a model file already, this won't download the model. Remember, you should not change the model's name or parent directory if you don't want to download it again.
 
 ### Use the model
-![image](https://github.com/yjg30737/pyqt-imageai-gui/assets/55078043/f88fbe78-e7bc-49cb-9bb2-394715c7dc88)
+![image](https://github.com/yjg30737/pyqt-imageai-gui/assets/55078043/8dec0f2c-026f-448e-a480-ef41a2d19a0a)
 
 ## TODO
-1. modify the result widget (currently QSplitter) as below
-![image](https://github.com/yjg30737/pyqt-imageai-gui/assets/55078043/16301b2b-9971-43b3-9aba-24bc1a91e9ab)
-
-2. show detections result as text
-3. highlight the result
-4. blah blah..
+1. show detections result as text
+2. highlight the result
+3. blah blah..
