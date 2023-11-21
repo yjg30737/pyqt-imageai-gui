@@ -145,6 +145,7 @@ class SplittedImageView(QGraphicsView):
 
     def setFilenameToRight(self, filename):
         pixmap = QPixmap(filename)
+        print(pixmap.width(), pixmap.height())
         if pixmap.width() < self.__min_width or pixmap.height() < self.__min_height:
             QMessageBox.information(self, 'Notification', f'Image is too small. Must be at least {self.__min_width}x{self.__min_height}.')
             return
