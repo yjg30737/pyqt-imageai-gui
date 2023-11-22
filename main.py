@@ -2,12 +2,10 @@ import os
 import sys
 
 from downloadModelDialog import DownloadModelDialog
-from findPathWidget import FindPathWidget
 from objectDetectionFromImageWidget import ObjectDetectionFromImageWidget
-from script import is_exists, get_model_path, get_result_image_by_doing_object_detection
-from selectModelDialog import SelectModelDialog
-from splittedImageView import SplittedImageView
 from objectDetectionFromVideoWidget import ObjectDetectionFromVideoWidget
+from script import is_exists, get_model_path
+from selectModelDialog import SelectModelDialog
 
 # Get the absolute path of the current script file
 script_path = os.path.abspath(__file__)
@@ -18,9 +16,9 @@ project_root = os.path.dirname(os.path.dirname(script_path))
 sys.path.insert(0, project_root)
 sys.path.insert(0, os.getcwd())  # Add the current directory as well
 
-from PyQt5.QtWidgets import QMainWindow, QPushButton, QApplication, QSplitter, QListWidget, QVBoxLayout, \
-    QWidget, QSizePolicy, QDialog, QMessageBox, QLabel, QTableWidget, QHeaderView, QTabWidget
-from PyQt5.QtCore import Qt, QCoreApplication, QThread, pyqtSignal
+from PyQt5.QtWidgets import QMainWindow, QApplication, QVBoxLayout, \
+    QWidget, QDialog, QMessageBox, QLabel, QTabWidget
+from PyQt5.QtCore import Qt, QCoreApplication
 from PyQt5.QtGui import QFont
 
 QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
@@ -71,6 +69,7 @@ class MainWindow(QMainWindow):
         self.__curModelLbl.setText(self.__curModelLbl.text() + ' ' + self.__cur_model_name)
 
         self.__objectDetectionFromImageWidget.setModel(self.__cur_model_name, self.__cur_model_path)
+        self.__objectDetectionFromVideoWidget.setModel(self.__cur_model_name, self.__cur_model_path)
 
 
 def main():
