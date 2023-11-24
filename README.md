@@ -1,5 +1,7 @@
 Using PyQt5 GUI to show imageAI object detection result
 
+Currently working on the presentation of object detection from video (the feature itself is completed).
+
 ## Requirements
 * PyQt5>=5.14
 * imageai (for using object detection)
