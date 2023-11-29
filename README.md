@@ -30,6 +30,7 @@ Note: If there is a model file already, this won't download the model. Remember,
 ## TODO
 1. show detections result as text
 2. highlight the result
-3. blah blah..
+3. allow user to change the box and label color
 
-4. 
+## Question
+I wonder SSD is available in ImageAI as well.
