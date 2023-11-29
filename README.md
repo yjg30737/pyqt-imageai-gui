@@ -1,6 +1,6 @@
 Using PyQt5 GUI to show imageAI object detection result
 
-Currently working on the presentation of object detection from video (the feature itself is completed).
+Both image and video is available for object detection.
 
 ## Requirements
 * PyQt5>=5.14
@@ -24,9 +24,12 @@ Model file will be downloaded in the root folder of this repo
 Note: If there is a model file already, this won't download the model. Remember, you should not change the model's name or parent directory if you don't want to download it again.
 
 ### Use the model
+
 ![image](https://github.com/yjg30737/pyqt-imageai-gui/assets/55078043/8dec0f2c-026f-448e-a480-ef41a2d19a0a)
 
 ## TODO
 1. show detections result as text
 2. highlight the result
 3. blah blah..
+
+4. 
