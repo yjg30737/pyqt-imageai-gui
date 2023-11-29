@@ -31,6 +31,8 @@ Note: If there is a model file already, this won't download the model. Remember,
 ### Object Detection from Video (This is more recent version of GUI)
 ![image](https://github.com/yjg30737/pyqt-imageai-gui/assets/55078043/c1758495-64a5-4f2e-a406-c32ff7e57f6b)
 
+Sample video: https://youtu.be/1QfF8uoGiOY
+
 ## TODO
 1. show detections result as text
 2. highlight the result
