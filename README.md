@@ -42,6 +42,6 @@ Sample video: https://youtu.be/1QfF8uoGiOY
 I wonder SSD is available in ImageAI as well.
 
 ## See Also
-<a href="https://github.com/yjg30737/pyqt-ultralytics-yolo-gui">Using YOLOv8 of Ultralytics to not only doing object detection but also semantic segmentation</a>
+<a href="https://github.com/yjg30737/pyqt-ultralytics-yolo-gui">pyqt-ultralytics-yolo-gui</a>: Using YOLOv8 of Ultralytics to not only doing object detection but also semantic segmentation
 
 ImageAI is using YOLOv3, but YOLOv8 is much faster and more accurate, which is good choice.
